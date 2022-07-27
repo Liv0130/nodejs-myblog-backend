@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
 
   const createPosts = await Post.create({ user, password, title, content });
   if (createPosts) {
-    return res.json({ message: "게시글을 생성하였습니다." });
+    res.status(201).send({ message: "게시글을 생성하였습니다." });
   }
   res.json({ data: createPosts });
 });
@@ -66,7 +66,7 @@ router.delete("/:_postId", async (req, res) => {
     await Post.deleteOne({ _id: postId });
     return res.json({ message: "게시글을 삭제하였습니다." });
   } else {
-    return res.json({ message: "비밀번호가 일치하지 않습니다." });
+    return res.status(400).json({ errorMessage: "비밀번호가 일치하지 않습니다."});
   }
 });
 

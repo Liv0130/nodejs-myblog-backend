@@ -17,7 +17,7 @@ router.get("/:_postId", async (req, res) => {
   const postId = req.params._postId;
   const [comments] = await Comment.find({ postId });
   if (!comments) {
-    return res.json({message: "댓글이 존재하지 않습니다."});
+    return res.status(400).json({ errorMessage: "댓글이 존재하지 않습니다."});
   } else {
   res.json({
     data:{
