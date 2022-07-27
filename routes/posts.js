@@ -4,13 +4,14 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const posts = await Post.find();
+  
   res.json({
     data: posts.map((post) => ({
       postId: post._id,
       user: post.user,
       title: post.title,
       createdAt: post.createdAt,
-    })),
+    })).reverse(),
   });
 });
 
